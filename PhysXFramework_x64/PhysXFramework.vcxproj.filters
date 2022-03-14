@@ -44,6 +44,9 @@
     <Filter Include="GameFiles\Scenes\W02_PhysX">
       <UniqueIdentifier>{8ada88e9-b3e1-41e8-9aba-82d0ad91b35c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameFiles\Scenes\Assignment_Scenes">
+      <UniqueIdentifier>{db9419a1-bd54-4839-a1fe-4e7a5c2922ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -175,6 +178,12 @@
     <ClInclude Include="TestScene.h">
       <Filter>GameFiles\Scenes\W01_PhysX</Filter>
     </ClInclude>
+    <ClInclude Include="Assignment0Scene.h">
+      <Filter>GameFiles\Scenes\Assignment_Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Assignment1Scene.h">
+      <Filter>GameFiles\Scenes\Assignment_Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -284,6 +293,12 @@
     </ClCompile>
     <ClCompile Include="TestScene.cpp">
       <Filter>GameFiles\Scenes\W01_PhysX</Filter>
+    </ClCompile>
+    <ClCompile Include="Assignment0Scene.cpp">
+      <Filter>GameFiles\Scenes\Assignment_Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Assignment1Scene.cpp">
+      <Filter>GameFiles\Scenes\Assignment_Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
