@@ -9,5 +9,28 @@ public:
 	Assignment1Scene(Assignment1Scene&& other) noexcept = delete;
 	Assignment1Scene& operator=(const Assignment1Scene& other) = delete;
 	Assignment1Scene& operator=(Assignment1Scene&& other) noexcept = delete;
+
+protected:
+	void Initialize() override;
+	void Update() override;
+	void Draw() const override;
+	void OnSceneActivated() override;
+	void OnSceneDeactivated() override;
+
+	void onTrigger(PxTriggerPair* pairs, PxU32 count) override;
+
+	GameObject* m_pLevelMesh{};
+	GameObject* m_pSphere1{};
+	PxRigidDynamic* m_pSphere1Actor{};
+	GameObject* m_pSphere2{};
+	GameObject* m_pSphere3{};
+	GameObject* m_pBox1{};
+	GameObject* m_pBox2{};
+	GameObject* m_pBoxTrigger1{};
+	GameObject* m_pBoxTrigger2{};
+	FMOD::Sound* m_pBellSound{};
+
+	GameObject* m_pHatch1{};
+	GameObject* m_pHatch2{};
 };
 

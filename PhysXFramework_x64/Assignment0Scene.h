@@ -18,5 +18,6 @@ protected:
 
 	std::vector<GameObject*> m_pCubes{};
 	GameObject* m_pSphere{};
+	PxRigidDynamic* m_pSphereActor{};
 };
 

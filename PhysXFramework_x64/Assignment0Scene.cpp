@@ -41,38 +41,37 @@ void Assignment0Scene::Initialize()
 
 	m_pSphere->Translate(0, 0, -5);
 
-	PxRigidDynamic* pSphereActor = PxGetPhysics().createRigidDynamic(PxTransform(PxIdentity));
-	PxRigidActorExt::createExclusiveShape(*pSphereActor, PxSphereGeometry(CubeSize), *pCubeMaterial);
-	m_pSphere->AttachRigidActor(pSphereActor);
+	m_pSphereActor = PxGetPhysics().createRigidDynamic(PxTransform(PxIdentity));
+	PxRigidActorExt::createExclusiveShape(*m_pSphereActor, PxSphereGeometry(CubeSize), *pCubeMaterial);
+	m_pSphere->AttachRigidActor(m_pSphereActor);
 }
 
 void Assignment0Scene::Update()
 {
 	const XMFLOAT3 forward{ GetSceneContext().GetCamera()->GetForward() };
 	const XMFLOAT3 right{ GetSceneContext().GetCamera()->GetRight() };
-	if (GetSceneContext().GetInput()->IsKeyboardKey(InputTriggerState::released, 'I'))
+	if (GetSceneContext().GetInput()->IsKeyboardKey(InputTriggerState::released, 'A'))
 	{
 		m_pSphere->GetRigidActor()->is<PxRigidDynamic>()->addForce(PxVec3{ -right.x * 50, -right.y * 50, -right.z * 50 }, PxForceMode::eIMPULSE);
 	}
-	if (GetSceneContext().GetInput()->IsKeyboardKey(InputTriggerState::released, 'P'))
+	if (GetSceneContext().GetInput()->IsKeyboardKey(InputTriggerState::released, 'D'))
 	{
 		m_pSphere->GetRigidActor()->is<PxRigidDynamic>()->addForce(PxVec3{ right.x * 5000, right.y * 5000, right.z * 5000 }, PxForceMode::eIMPULSE);
 	}
-	if (GetSceneContext().GetInput()->IsKeyboardKey(InputTriggerState::released, 'O'))
+	if (GetSceneContext().GetInput()->IsKeyboardKey(InputTriggerState::released, 'W'))
 	{
 		m_pSphere->GetRigidActor()->is<PxRigidDynamic>()->addForce(PxVec3{ forward.x * 50, forward.y * 50, forward.z * 5000 }, PxForceMode::eIMPULSE);
 	}
-	if (GetSceneContext().GetInput()->IsKeyboardKey(InputTriggerState::released,'L'))
+	if (GetSceneContext().GetInput()->IsKeyboardKey(InputTriggerState::released,'S'))
 	{
 		m_pSphere->GetRigidActor()->is<PxRigidDynamic>()->addForce(PxVec3{ -forward.x * 5000, -forward.y * 5000, -forward.z * 5000 }, PxForceMode::eIMPULSE);
 	}
-
-	PxRigidBodyExt::updateMassAndInertia(m_pSphere->GetRigidActor(),PxReal{10}, &PxVec3{2.f,2.f,2.f})
+	PxVec3 vec{ 2.f,2.f,2.f };
+	PxRigidBodyExt::updateMassAndInertia(*m_pSphereActor, PxReal{ 10 }, &vec);
 }
 
 void Assignment0Scene::Draw() const
 {
-
 }
 
 void Assignment0Scene::OnSceneActivated()

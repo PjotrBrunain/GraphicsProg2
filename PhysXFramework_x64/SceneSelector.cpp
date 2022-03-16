@@ -2,6 +2,7 @@
 #include "SceneSelector.h"
 
 #include "Assignment0Scene.h"
+#include "Assignment1Scene.h"
 #include "SceneManager.h"
 
 //Change this define to activate/deactive the corresponding scenes
@@ -27,6 +28,7 @@ namespace dae
 #ifdef W01
 		pSceneManager->AddGameScene(new TestScene());
 		pSceneManager->AddGameScene(new Assignment0Scene());
+		pSceneManager->AddGameScene(new Assignment1Scene());
 #endif
 
 #ifdef W02

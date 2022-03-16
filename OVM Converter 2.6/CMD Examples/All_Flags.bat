@@ -1,0 +1,1 @@
+"../OVMCreator.exe" -s -i Chair.obj -o ChairOutput.ovm --left-handed 0 --flip-uvs --calculate-tangent --join-verts --triangulate --physx-triangle --physx-convex

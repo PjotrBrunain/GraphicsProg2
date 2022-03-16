@@ -1,0 +1,1 @@
+"../OVMCreator.exe" -i Chair.obj --flip-uvs
