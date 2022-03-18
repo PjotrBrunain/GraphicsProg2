@@ -9,102 +9,127 @@
 
 void Assignment1Scene::Initialize()
 {
-	//ground
-	PxRigidStatic* pGroundActor{ PxGetPhysics().createRigidStatic(PxTransform{PxQuat{PxPiDivTwo, PxVec3{0.f, 0.f, 1.f}}}) };
 	const PxMaterial* pDefaultMaterial{ PxGetPhysics().createMaterial(1.f, 0.f, 1.f) };
-	PxRigidActorExt::createExclusiveShape(*pGroundActor, PxPlaneGeometry{}, *pDefaultMaterial);
-	GetPhysxScene()->addActor(*pGroundActor);
-
+	//ground
+	{
+		PxRigidStatic* pGroundActor{ PxGetPhysics().createRigidStatic(PxTransform{PxQuat{PxPiDivTwo, PxVec3{0.f, 0.f, 1.f}}}) };
+		PxRigidActorExt::createExclusiveShape(*pGroundActor, PxPlaneGeometry{}, *pDefaultMaterial);
+		GetPhysxScene()->addActor(*pGroundActor);
+	}
 	//Level
-	MeshObject* levelMesh{ new MeshObject{L"Resources/Meshes/Level.ovm"} };
-	levelMesh->Initialize();
-	m_pLevelMesh = levelMesh;
-	AddGameObject(m_pLevelMesh);
+	{
+		MeshObject* levelMesh{ new MeshObject{L"Resources/Meshes/Level.ovm"} };
+		levelMesh->Initialize();
+		m_pLevelMesh = levelMesh;
+		AddGameObject(m_pLevelMesh);
 
-	PxRigidStatic* pLevelActor{ PxGetPhysics().createRigidStatic(PxTransform(PxIdentity)) };
-	PxTriangleMesh* triangleMesh{ ContentManager::GetInstance()->Load<PxTriangleMesh>(L"Resources/Meshes/Level.ovpt") };
-	PxTriangleMeshGeometry* triangleMeshGeo{ new PxTriangleMeshGeometry{triangleMesh} };
-	PxRigidActorExt::createExclusiveShape(*pLevelActor, *triangleMeshGeo, *pDefaultMaterial);
-	m_pLevelMesh->AttachRigidActor(pLevelActor);
-
+		PxRigidStatic* pLevelActor{ PxGetPhysics().createRigidStatic(PxTransform(PxIdentity)) };
+		PxTriangleMesh* triangleMesh{ ContentManager::GetInstance()->Load<PxTriangleMesh>(L"Resources/Meshes/Level.ovpt") };
+		PxTriangleMeshGeometry* triangleMeshGeo{ new PxTriangleMeshGeometry{triangleMesh} };
+		PxRigidActorExt::createExclusiveShape(*pLevelActor, *triangleMeshGeo, *pDefaultMaterial);
+		m_pLevelMesh->AttachRigidActor(pLevelActor);
+	}
+	PxMaterial* pSphereMaterial{ PxGetPhysics().createMaterial(1.f, 0.f, 0.f) };
 	//Spheres
-	const float SphereSize{1.f};
-	const PxMaterial* pSphereMaterial{ PxGetPhysics().createMaterial(1.f, 0.f, 0.f) };
+	{
+		const float SphereSize{ 1.f };
 
 
-	m_pSphere1 = new SpherePosColorNorm{ SphereSize, 75, 75, XMFLOAT4(Colors::Beige) };
-	AddGameObject(m_pSphere1);
+		m_pSphere1 = new SpherePosColorNorm{ SphereSize, 75, 75, XMFLOAT4(Colors::Beige) };
+		AddGameObject(m_pSphere1);
 
-	m_pSphere1->Translate(0, 5, 0);
+		m_pSphere1->Translate(0, 5, 0);
 
-	m_pSphere1Actor = PxGetPhysics().createRigidDynamic(PxTransform(PxIdentity));
-	PxRigidActorExt::createExclusiveShape(*m_pSphere1Actor, PxSphereGeometry(SphereSize), *pSphereMaterial);
-	m_pSphere1->AttachRigidActor(m_pSphere1Actor);
-	m_pSphere1Actor->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Z, true);
+		m_pSphere1Actor = PxGetPhysics().createRigidDynamic(PxTransform(PxIdentity));
+		PxRigidActorExt::createExclusiveShape(*m_pSphere1Actor, PxSphereGeometry(SphereSize), *pSphereMaterial);
+		m_pSphere1->AttachRigidActor(m_pSphere1Actor);
+		m_pSphere1Actor->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Z, true);
 
-	m_pSphere2 = new SpherePosColorNorm{ SphereSize, 75, 75, XMFLOAT4(Colors::Beige) };
-	AddGameObject(m_pSphere2);
+		m_pSphere2 = new SpherePosColorNorm{ SphereSize, 75, 75, XMFLOAT4(Colors::Beige) };
+		AddGameObject(m_pSphere2);
 
-	m_pSphere2->Translate(-5, 23, 0);
+		m_pSphere2->Translate(-5, 23, 0);
 
-	PxRigidDynamic* pSphereActor = PxGetPhysics().createRigidDynamic(PxTransform(PxIdentity));
-	PxRigidActorExt::createExclusiveShape(*pSphereActor, PxSphereGeometry(SphereSize), *pSphereMaterial);
-	m_pSphere2->AttachRigidActor(pSphereActor);
+		PxRigidDynamic* pSphereActor = PxGetPhysics().createRigidDynamic(PxTransform(PxIdentity));
+		PxRigidActorExt::createExclusiveShape(*pSphereActor, PxSphereGeometry(SphereSize), *pSphereMaterial);
+		m_pSphere2->AttachRigidActor(pSphereActor);
 
-	m_pSphere3 = new SpherePosColorNorm{ SphereSize, 75, 75, XMFLOAT4(Colors::Beige) };
-	AddGameObject(m_pSphere3);
+		m_pSphere3 = new SpherePosColorNorm{ SphereSize, 75, 75, XMFLOAT4(Colors::Beige) };
+		AddGameObject(m_pSphere3);
 
-	m_pSphere3->Translate(5, 23, 0);
+		m_pSphere3->Translate(5, 23, 0);
 
-	pSphereActor = PxGetPhysics().createRigidDynamic(PxTransform(PxIdentity));
-	PxRigidActorExt::createExclusiveShape(*pSphereActor, PxSphereGeometry(SphereSize), *pSphereMaterial);
-	m_pSphere3->AttachRigidActor(pSphereActor);
-
+		pSphereActor = PxGetPhysics().createRigidDynamic(PxTransform(PxIdentity));
+		PxRigidActorExt::createExclusiveShape(*pSphereActor, PxSphereGeometry(SphereSize), *pSphereMaterial);
+		m_pSphere3->AttachRigidActor(pSphereActor);
+	}
 	//Boxes
 	constexpr float CubeSize{ 2.f };
+	{
+		m_pBox1 = new CubePosColorNorm(CubeSize, CubeSize, CubeSize);
+		AddGameObject(m_pBox1);
 
-	m_pBox1 = new CubePosColorNorm(CubeSize, CubeSize, CubeSize);
-	AddGameObject(m_pBox1);
+		m_pBox1->Translate(4, 5, 0);
 
-	m_pBox1->Translate(4, 5, 0);
+		PxRigidDynamic* pCubeActor = PxGetPhysics().createRigidDynamic(PxTransform(PxIdentity));
+		PxRigidActorExt::createExclusiveShape(*pCubeActor, PxBoxGeometry{ CubeSize / 2.f,CubeSize / 2.f,CubeSize / 2.f }, *pSphereMaterial);
+		m_pBox1->AttachRigidActor(pCubeActor);
+		pCubeActor->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Z, true);
 
-	PxRigidDynamic* pCubeActor = PxGetPhysics().createRigidDynamic(PxTransform(PxIdentity));
-	PxRigidActorExt::createExclusiveShape(*pCubeActor, PxBoxGeometry{ CubeSize / 2.f,CubeSize / 2.f,CubeSize / 2.f }, *pSphereMaterial);
-	m_pBox1->AttachRigidActor(pCubeActor);
-	pCubeActor->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Z, true);
+		m_pBox2 = new CubePosColorNorm(CubeSize, CubeSize, CubeSize);
+		AddGameObject(m_pBox2);
 
-	m_pBox2 = new CubePosColorNorm(CubeSize, CubeSize, CubeSize);
-	AddGameObject(m_pBox2);
+		m_pBox2->Translate(-4, 5, 0);
 
-	m_pBox2->Translate(-4, 5, 0);
+		pCubeActor = PxGetPhysics().createRigidDynamic(PxTransform(PxIdentity));
+		PxRigidActorExt::createExclusiveShape(*pCubeActor, PxBoxGeometry{ CubeSize / 2.f,CubeSize / 2.f,CubeSize / 2.f }, *pSphereMaterial);
+		m_pBox2->AttachRigidActor(pCubeActor);
+		pCubeActor->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Z, true);
+	}
 
-	pCubeActor = PxGetPhysics().createRigidDynamic(PxTransform(PxIdentity));
-	PxRigidActorExt::createExclusiveShape(*pCubeActor, PxBoxGeometry{ CubeSize / 2.f,CubeSize / 2.f,CubeSize / 2.f }, *pSphereMaterial);
-	m_pBox2->AttachRigidActor(pCubeActor);
-	pCubeActor->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Z, true);
+	//Triggers
+	{
+		m_pBoxTrigger1 = new CubePosColorNorm(CubeSize, CubeSize, CubeSize);
+		AddGameObject(m_pBoxTrigger1);
 
-	m_pBoxTrigger1 = new CubePosColorNorm(CubeSize, CubeSize, CubeSize);
-	AddGameObject(m_pBoxTrigger1);
+		m_pBoxTrigger1->Translate(-7, 2, 0);
 
-	m_pBoxTrigger1->Translate(-7, 2, 0);
+		PxRigidStatic* pTriggerActor = PxGetPhysics().createRigidStatic(PxTransform(PxIdentity));
+		PxShape* pTriggerShape = PxRigidActorExt::createExclusiveShape(*pTriggerActor, PxBoxGeometry{ CubeSize / 2.f,CubeSize / 2.f,CubeSize / 2.f }, *pSphereMaterial);
+		m_pBoxTrigger1->AttachRigidActor(pTriggerActor);
+		pTriggerShape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, false);
+		pTriggerShape->setFlag(PxShapeFlag::eTRIGGER_SHAPE, true);
 
-	PxRigidStatic* pTriggerActor = PxGetPhysics().createRigidStatic(PxTransform(PxIdentity));
-	PxShape* pTriggerShape =  PxRigidActorExt::createExclusiveShape(*pTriggerActor, PxBoxGeometry{ CubeSize / 2.f,CubeSize / 2.f,CubeSize / 2.f }, *pSphereMaterial);
-	m_pBoxTrigger1->AttachRigidActor(pTriggerActor);
-	pTriggerShape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, false);
-	pTriggerShape->setFlag(PxShapeFlag::eTRIGGER_SHAPE, true);
+		m_pBoxTrigger2 = new CubePosColorNorm(CubeSize, CubeSize, CubeSize);
+		AddGameObject(m_pBoxTrigger2);
 
-	m_pBoxTrigger2 = new CubePosColorNorm(CubeSize, CubeSize, CubeSize);
-	AddGameObject(m_pBoxTrigger2);
+		m_pBoxTrigger2->Translate(7, 2, 0);
 
-	m_pBoxTrigger2->Translate(7, 2, 0);
+		pTriggerActor = PxGetPhysics().createRigidStatic(PxTransform(PxIdentity));
+		pTriggerShape = PxRigidActorExt::createExclusiveShape(*pTriggerActor, PxBoxGeometry{ CubeSize / 2.f,CubeSize / 2.f,CubeSize / 2.f }, *pSphereMaterial);
+		pTriggerShape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, false);
+		pTriggerShape->setFlag(PxShapeFlag::eTRIGGER_SHAPE, true);
+		m_pBoxTrigger2->AttachRigidActor(pTriggerActor);
+	}
 
-	pTriggerActor = PxGetPhysics().createRigidStatic(PxTransform(PxIdentity));
-	pTriggerShape = PxRigidActorExt::createExclusiveShape(*pTriggerActor, PxBoxGeometry{ CubeSize / 2.f,CubeSize / 2.f,CubeSize / 2.f }, *pSphereMaterial);
-	pTriggerShape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, false);
-	pTriggerShape->setFlag(PxShapeFlag::eTRIGGER_SHAPE, true);
-	m_pBoxTrigger2->AttachRigidActor(pTriggerActor);
+	//Hatches
+	{
+		m_pHatch1 = new CubePosColorNorm{ 2.f,0.5f,2.f };
+		AddGameObject(m_pHatch1);
 
+		m_pHatch1->Translate(-9.f, 17.f, 0.f);
+
+		m_pHatch1Actor = PxCreateKinematic(PxGetPhysics(), PxTransform(PxIdentity), PxBoxGeometry{ 1.f,0.25f,1.f }, *pSphereMaterial, PxReal{ 10.f });
+		m_pHatch1->AttachRigidActor(m_pHatch1Actor);
+
+		m_pHatch2 = new CubePosColorNorm{ 2.f,0.5f,2.f };
+		AddGameObject(m_pHatch2);
+
+		m_pHatch2->Translate(9.f, 17.f, 0.f);
+
+		m_pHatch2Actor = PxCreateKinematic(PxGetPhysics(), PxTransform(PxIdentity), PxBoxGeometry{ 1.f,0.25f,1.f }, *pSphereMaterial, PxReal{ 10.f });
+		m_pHatch2->AttachRigidActor(m_pHatch2Actor);
+	}
 }
 
 void Assignment1Scene::Update()
@@ -130,6 +155,19 @@ void Assignment1Scene::Update()
 	PxVec3 vec{ 1.f,1.f,1.f };
 	PxRigidBodyExt::updateMassAndInertia(*m_pSphere1Actor, PxReal{ 1 }, &vec);
 
+
+	if (m_Trigger1 && m_Trigger1DoOnce)
+	{
+		auto location = m_pHatch1->GetPosition();
+		m_pHatch1Actor->setKinematicTarget(PxTransform{ location.x - 3.f, location.y, location.z });
+		m_Trigger1DoOnce = false;
+	}
+	if (m_Trigger2 && m_Trigger2DoOnce)
+	{
+		auto location = m_pHatch2->GetPosition();
+		m_pHatch2Actor->setKinematicTarget(PxTransform{ location.x + 3.f, location.y, location.z });
+		m_Trigger2DoOnce = false;
+	}
 }
 
 void Assignment1Scene::Draw() const
@@ -160,7 +198,14 @@ void Assignment1Scene::onTrigger(PxTriggerPair* pairs, PxU32 count)
 			SoundManager::GetInstance()->GetSystem()->getMasterChannelGroup(&pChannelGroup);
 			FMOD::Channel* pChannel{};
 			SoundManager::GetInstance()->GetSystem()->playSound(m_pBellSound, pChannelGroup, false, &pChannel);
-		}
+
+			//PxRigidDynamic* pDynamicActor = dynamic_cast<PxRigidDynamic*>(m_pHatch1->GetRigidActor());
+			//if (pDynamicActor)
+			//{
+			//	pDynamicActor->setKinematicTarget(PxTransform{ m_pHatch1->GetPosition().x - 3.f, m_pHatch1->GetPosition().y, m_pHatch1->GetPosition().z });
+			//}
+			m_Trigger1 = true;
+			}
 		std::cout << "trigger1\n";
 	}
 	if (pairs->triggerActor == m_pBoxTrigger2->GetRigidActor())
@@ -171,6 +216,7 @@ void Assignment1Scene::onTrigger(PxTriggerPair* pairs, PxU32 count)
 			SoundManager::GetInstance()->GetSystem()->getMasterChannelGroup(&pChannelGroup);
 			FMOD::Channel* pChannel{};
 			SoundManager::GetInstance()->GetSystem()->playSound(m_pBellSound, pChannelGroup, false, &pChannel);
+			m_Trigger2 = true;
 		}
 		std::cout << "trigger2\n";
 	}

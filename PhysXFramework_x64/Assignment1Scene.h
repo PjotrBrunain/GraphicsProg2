@@ -27,10 +27,16 @@ protected:
 	GameObject* m_pBox1{};
 	GameObject* m_pBox2{};
 	GameObject* m_pBoxTrigger1{};
+	bool m_Trigger1{};
+	bool m_Trigger1DoOnce{true};
+	bool m_Trigger2{};
+	bool m_Trigger2DoOnce{ true };
 	GameObject* m_pBoxTrigger2{};
 	FMOD::Sound* m_pBellSound{};
 
 	GameObject* m_pHatch1{};
+	PxRigidDynamic* m_pHatch1Actor{};
 	GameObject* m_pHatch2{};
+	PxRigidDynamic* m_pHatch2Actor{};
 };
 

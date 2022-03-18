@@ -57,7 +57,7 @@ void CreateVertex(inout TriangleStream<GS_DATA> triStream, float3 pos, float4 co
 	//Fill in all the fields
 	//Append it to the TriangleStream
     GS_DATA newGsData = (GS_DATA) 0;
-    newGsData.Position = pos;
+    newGsData.Position = float4(pos,0);
     newGsData.Color = col;
     newGsData.TexCoord = texCoord;
     newGsData.Channel = channel;
