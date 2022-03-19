@@ -1,0 +1,17 @@
+[2022-3-17 - 17:7:40:941][DEBUG]   Adapter 0 : NVIDIA GeForce RTX 3070 Laptop GPU
+[2022-3-17 - 17:7:40:947][DEBUG]   Adapter 1 : Microsoft Basic Render Driver
+[2022-3-17 - 17:7:40:948][DEBUG]   2 Adapter(s) found
+[2022-3-17 - 17:7:40:948][DEBUG]   InitalizeAdapterAndOutput ok.
+[2022-3-17 - 17:7:40:949][DEBUG]   Window Class Created
+[2022-3-17 - 17:7:40:950][DEBUG]   Desktop resolution: 1707 x 1067
+[2022-3-17 - 17:7:41:61][DEBUG]   Window Opened
+[2022-3-17 - 17:7:41:426][DEBUG]   Direct3D Initialized
+[2022-3-17 - 17:7:42:220][DEBUG]   Managers Initialized!
+[2022-3-17 - 17:7:42:222][INFO]    Press 'Page Up' or 'Page Down' to cycle between the different scenes
+[2022-3-17 - 17:7:42:223][INFO]    Press 'I' to toggle the debug renderer.
+[2022-3-17 - 17:7:42:224][INFO]    Press 'M' to do physics stepping.
+[2022-3-17 - 17:7:42:225][INFO]    Press 'L' to stop doing physics stepping.
+[2022-3-17 - 17:7:42:340][DEBUG]   Parsing mesh: Object
+[2022-3-17 - 17:7:42:362][DEBUG]   Scenes Initialized!
+[2022-3-17 - 17:7:42:362][INFO]    Scene Activated > "TestScene"
+[2022-3-17 - 17:7:52:526][DEBUG]   Core Initialization Finished
